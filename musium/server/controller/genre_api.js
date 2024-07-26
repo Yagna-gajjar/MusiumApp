@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 
 export const Genre = async (req, res) => {
     try {
-        let colorArray = ['#475c6c', '#cd8b62', '#741b47', '#cc0000', '#09cc00', '#ead1dc', '#999999', '#6a393b', '#37423d', '#b2ddf9']
-        let generateRandomColor = () => {
-            let color = Math.floor(Math.random() * (colorArray.length))
-            let mycolor = colorArray[color]
-            colorArray.splice(color, 1);
+        let colors = {
+            'Kpop': '#cc00cc',
+            'Filmi': '#ffd9b3',
+            'Romantic': '#ff80aa',
+            'Chill': '#2eb82e',
+            'Pop': '#ff6600',
+        }
+        let generateRandomColor = (genre) => {
+            let mycolor = colors[genre]
             return mycolor;
         };
 
@@ -36,14 +40,15 @@ export const Genre = async (req, res) => {
         ];
 
         const genreData = await songs.aggregate(pipeline);
-
-        const genreDataWithColors = genreData.map(doc => ({
-            ...doc,
-            themeColor: generateRandomColor()
-        }));
+        const genreDataWithColors = genreData.map(doc => (
+            {
+                ...doc,
+                themeColor: generateRandomColor(doc.genre)
+            }
+        )
+        );
 
         console.log(genreDataWithColors);
-
 
         if (!genreDataWithColors) {
             return res.status(404).json({ msg: "genre not found" });

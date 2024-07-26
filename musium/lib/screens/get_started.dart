@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musium/screens/LogInPage.dart';
+import 'package:musium/screens/add_user_details.dart';
 import 'package:musium/utils/app_colors.dart';
 
 class GetStarted extends StatefulWidget {
@@ -141,6 +142,7 @@ class _GetStartedState extends State<GetStarted> {
                           child: ElevatedButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage(),));
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => AddUserDetails(email: "yagna@gmail.com",lan: 'en',username: 'yagna gajjar',password: 'Yagna@13'),));
                               },
                               child: Container(
                                   padding: EdgeInsets.only(top: 20, bottom: 20),
